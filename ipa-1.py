@@ -103,8 +103,8 @@ def interest(principal, rate, periods):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    simple_int = principal * (rate*periods)
-    final = principal + simple_int
+    simple_int = int(principal * (rate*periods))
+    final = int(principal + simple_int)
     return final
 
 def body_mass_index(weight, height):
