@@ -37,16 +37,16 @@ def shift_letter(letter, shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    assigned_value = ord(letter)
-    shifted_value = assigned_value + shift
-    if assigned_value == 32:
-        new_letter = letter
-    elif shifted_value>90:
-        new_value = shifted_value - 26
-        new_letter = chr(new_value)
-    else:
-        new_value = shifted_value
-        new_letter = chr(new_value)
+    if letter == ' ':
+        return ' '
+    
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    letter = letter.upper()
+    
+    letter_index = alphabet.index(letter)
+    shifted_index = (letter_index + shift) % 26
+    new_letter = alphabet[shifted_index]
+
     return new_letter
 
 def caesar_cipher(message, shift):
@@ -69,21 +69,21 @@ def caesar_cipher(message, shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    transformed_message = []
-    for letter in message:
-        assigned_value = ord(letter)
-        shifted_value = assigned_value + shift
-        if assigned_value == 32:
-            new_letter = letter
-        elif shifted_value>90:
-            new_value = shifted_value - 26
-            new_letter = chr(new_value)
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    new_message = ''
+
+    for i in range(len(message)):
+        letter = message[i]
+
+        if letter == ' ':
+            new_message += ' '
         else:
-            new_value = shifted_value
-            new_letter = chr(new_value)
-        transformed_message.append(new_letter)
-    output = ''.join(transformed_message)
-    return output
+            letter_index = alphabet.index(letter)
+            shifted_index = (letter_index + shift) % 26
+            shifted_letter = alphabet[shifted_index]
+            new_message += shifted_letter
+
+    return new_message
 
 def shift_by_letter(letter, letter_shift):
     '''Shift By Letter.
@@ -113,17 +113,17 @@ def shift_by_letter(letter, letter_shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    ALPHABET = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-    assigned_value = ALPHABET.index(letter)
-    shift_value = ALPHABET.index(letter_shift)
-    shifted_value = assigned_value + shift_value
-    if shifted_value>25:
-        new_value = shifted_value - 26
-        new_letter = ALPHABET[new_value]
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    if letter == ' ':
+        shifted_letter = ' '
     else:
-        new_value = shifted_value
-        new_letter = ALPHABET[new_value]
-    return new_letter
+        letter_index = alphabet.index(letter)
+        shift_index = alphabet.index(letter_shift)
+
+        shifted_index = (letter_index + shift_index) % 26
+        shifted_letter = alphabet[shifted_index]
+    return shifted_letter
 
 def vigenere_cipher(message, key):
     '''Vigenere Cipher.
