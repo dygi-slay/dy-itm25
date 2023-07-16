@@ -149,4 +149,28 @@ def eta(first_stop, second_stop, route_map):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    start_leg_index = ""
+    legs_keys = tuple(route_map.keys())
+
+    # finding where start stop is first stop
+    for leg in range(len(legs_keys)):
+        if legs_keys[leg][0] == first_stop:
+            start_leg_index = leg
+    
+    # if input is not im map
+    if start_leg_index == "": 
+        eta = 'First stop not found. Please try again.'
+    
+    # getting eta
+    current_leg = start_leg_index
+    eta = 0
+
+    while legs_keys[current_leg - 1][1] != second_stop:
+        eta = eta + route_map[legs_keys[current_leg]]["travel_time_mins"]
+        if current_leg + 1 >= len(legs_keys): # destination has already been passed 
+            current_leg = 0
+        elif current_leg + 1 < len(legs_keys):
+            current_leg = current_leg + 1
+
+    return eta
+    
